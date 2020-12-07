@@ -3,7 +3,7 @@ import java.io.File
 fun main() {
     val rules = mutableMapOf<String,Map<String,Int>>()
     val regex = Regex("""(\d*)\s*(\w+ \w+) bags?""")
-    File("aoc2020/day7.txt").forEachLine {
+    File("day7.txt").forEachLine {
         val matches = regex.findAll(it).map { it.groupValues }.toList()
         rules[matches[0][2]] = matches.drop(1).mapNotNull {
             if (it[2] != "no other") it[2] to it[1].toInt() else null
