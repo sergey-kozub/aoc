@@ -20,7 +20,7 @@ fun main() {
     }
     println(emulate(program).first)
 
-    program.mapIndexed { idx, (instr, value) ->
+    val result = program.mapIndexed { idx, (instr, value) ->
         if (instr == "acc") null else {
             val line = (if (instr != "jmp") "jmp" else "nop") to value
             val test = program.take(idx) + listOf(line) + program.drop(idx + 1)
@@ -28,4 +28,5 @@ fun main() {
             if (loop) null else acc
         }
     }.filterNotNull()
+    println(result)
 }
