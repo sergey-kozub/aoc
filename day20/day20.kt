@@ -85,7 +85,7 @@ fun main() {
  #  #  #  #  #  #   
 """.trim('\n').split('\n')
     val nMonsters = (0..7).map { sea.option(it) }.maxOf { it.findAll(monster) }
-    print("Monsters: $nMonsters")
+    println("Monsters: $nMonsters")
 
     fun count(a: List<String>) = a.map { it.count { it == '#' } }.sum()
     println(count(sea.grid) - nMonsters * count(monster))

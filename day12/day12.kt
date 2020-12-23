@@ -1,4 +1,5 @@
 import java.io.File
+import kotlin.math.*
 
 class Ship(var tx: Int, var ty: Int, val movingTarget: Boolean) {
     var x: Int = 0

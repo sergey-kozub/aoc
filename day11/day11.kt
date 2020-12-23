@@ -50,7 +50,7 @@ class Grid(input: List<String>, val near: Boolean) {
 }
 
 fun main() {
-    val input = File("aoc2020/day11/day11.txt").readLines()
+    val input = File("day11.txt").readLines()
     println(Grid(input, true).stabilize())
     println(Grid(input, false).stabilize())
 }
