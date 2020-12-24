@@ -14,6 +14,7 @@ def find_range(A, W):
 
 data = list(map(int, open("day9.txt")))
 W = find_weak(data, 25)
+print(W)
 i, j = find_range(data, W)[0]
 part = data[i:j + 1]
-print(W, min(part) + max(part))
+print(min(part) + max(part))

@@ -28,5 +28,5 @@ fun main() {
             if (loop) null else acc
         }
     }.filterNotNull()
-    println(result)
+    println(result[0])
 }

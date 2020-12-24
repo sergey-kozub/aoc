@@ -23,7 +23,7 @@ fun findRange(A: List<Long>, W: Long): Pair<Int,Int>? {
 
 fun main() {
     val input = File("day9.txt").readLines().map { it.toLong() }
-    val W = findWeak(input, 25)
+    val W = findWeak(input, 25)!!
     val R = findRange(input, W)!!
     val range = input.slice(R.first..R.second)
     println(W)

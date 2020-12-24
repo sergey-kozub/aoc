@@ -30,14 +30,18 @@ fun main() {
     // Part 2
     val l42 = options[42]!!.first().length
     val l31 = options[31]!!.first().length
-    val matches_8 = { msg: String ->
-        options[42]!!.any { msg.startsWith(it) } &&
-        (msg.length == l42 || matches_8(msg.drop(l42))) }
-    val matches_11 = { msg: String ->
-        options[42]!!.any { msg.startsWith(it) } &&
+    fun matches_8(msg: String): Boolean {
+        return options[42]!!.any { msg.startsWith(it) } &&
+        (msg.length == l42 || matches_8(msg.drop(l42)))
+    }
+    fun matches_11(msg: String): Boolean {
+        return options[42]!!.any { msg.startsWith(it) } &&
         options[31]!!.any { msg.endsWith(it) } &&
-        (msg.length == l42 + l31 || matches_11(msg.drop(l42).dropLast(l31))) }
-    val matches_0 = { msg: String -> (0..msg.length).any {
-        matches_8(msg.take(it)) && matches_11(msg.drop(it)) } }
+        (msg.length == l42 + l31 || matches_11(msg.drop(l42).dropLast(l31)))
+    }
+    fun matches_0(msg: String): Boolean {
+        return (0..msg.length).any {
+            matches_8(msg.take(it)) && matches_11(msg.drop(it)) }
+    }
     println(messages.count { matches_0(it) })
 }

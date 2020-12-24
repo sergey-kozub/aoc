@@ -1,6 +1,6 @@
 import java.io.File
 
-fun play(N: Int): Int {
+fun play(input: List<Int>, N: Int): Int {
     val spoken = input.mapIndexed { k, v -> v to k + 1 }
         .toMap().toMutableMap()
     var prev = input.last()
@@ -13,8 +13,8 @@ fun play(N: Int): Int {
 }
 
 fun main() {
-    val input = File("aoc2020/day15/day15.txt").readText().trim()
+    val input = File("day15.txt").readText().trim()
         .split(',').map { it.toInt() }
-    println(play(2020))
-    println(play(30000000))
+    println(play(input, 2020))
+    println(play(input, 30000000))
 }
