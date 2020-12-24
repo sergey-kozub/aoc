@@ -33,17 +33,17 @@ class Floor(input: List<String>) {
     }
     
     fun move() {
-        val state = tiles.toSet()
+        val black = tiles.toSet()
         val white = mutableSetOf<Tile>()
-        for (b in state) {
+        for (b in black) {
             val a = dir.values.map { (dx, dy) -> Tile(b.x + dx, b.y + dy) }
-            val n = a.count { it in state }
+            val n = a.count { it in black }
             if (n == 0 || n > 2) tiles.remove(b)
-            white.addAll(a)
+            white.addAll(a.filter { it !in black })
         }
-        for (w in white.sortedWith { a, b -> if (a.x != b.x) a.x - b.x else a.y - b.y }) {
+        for (w in white) {
             val a = dir.values.map { (dx, dy) -> Tile(w.x + dx, w.y + dy) }
-            val n = a.count { it in state }
+            val n = a.count { it in black }
             if (n == 2) tiles.add(w)
         }
     }
