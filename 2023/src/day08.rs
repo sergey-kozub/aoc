@@ -52,7 +52,7 @@ impl Game {
     }).count() + 1
   }
 
-  fn advance_all<'a>(&'a self, cur: &'a str) -> &str {
+  fn advance_all<'a>(&'a self, cur: &'a str) -> &'a str {
     self.moves.iter().fold(cur, |a, &b| self.advance_one(a, b))
   }
 

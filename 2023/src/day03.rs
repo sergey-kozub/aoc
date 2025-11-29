@@ -38,7 +38,7 @@ impl Engine {
       for x in 0..self.width {
         let digit = self.data[y][x].to_digit(10);
         match current.as_mut() {
-          Some(mut label) => match digit {
+          Some(label) => match digit {
             Some(v) => {
               label.size += 1;
               label.value = label.value * 10 + v;
