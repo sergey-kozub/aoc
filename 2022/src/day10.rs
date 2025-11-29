@@ -23,7 +23,7 @@ impl Program {
         Program { ops }
     }
 
-    fn iter(&self) -> ProgramIter {
+    fn iter(&self) -> ProgramIter<'_> {
         ProgramIter {
             ops: &self.ops[..],
             pos: 0,

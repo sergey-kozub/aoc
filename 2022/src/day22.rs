@@ -94,7 +94,7 @@ impl Maze {
         y >= 1 && y <= self.rows.len() && self.rows[y - 1].is_valid(x)
     }
 
-    fn iter(&self, path: &Path) -> MazeIter {
+    fn iter(&self, path: &Path) -> MazeIter<'_> {
         MazeIter {
             maze: self,
             path: path.moves.iter().rev().cloned().collect(),
@@ -176,7 +176,7 @@ struct Surface<'a> {
 }
 
 impl<'a> Surface<'a> {
-    fn from(maze: &Maze) -> Surface {
+    fn from(maze: &Maze) -> Surface<'_> {
         Surface { maze, visited: HashSet::new() }
     }
 
@@ -342,7 +342,7 @@ impl Cube {
         Cube { surface, sides: sides.try_into().unwrap(), size }
     }
 
-    fn iter(&self, path: &Path) -> CubeIter {
+    fn iter(&self, path: &Path) -> CubeIter<'_> {
         CubeIter {
             cube: self,
             path: path.moves.iter().rev().cloned().collect(),
