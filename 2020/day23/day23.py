@@ -1,4 +1,4 @@
-input_ = "137826495"
+input_ = "942387615"
 
 class Node:
     def __init__(self, label):

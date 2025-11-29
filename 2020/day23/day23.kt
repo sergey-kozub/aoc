@@ -34,7 +34,7 @@ class Circle(input: String, val total: Int) {
 }
 
 fun main() {
-    val input = "137826495"
+    val input = "942387615"
 
     val small = Circle(input, 9)
     small.move(1, 100)

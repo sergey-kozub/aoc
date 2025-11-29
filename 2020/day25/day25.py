@@ -12,6 +12,6 @@ def reverse(res):
         n, s = n * N % M, s + 1
     return s
 
-A, B = 10705932, 12301431
+A, B = 8987316, 14681524
 print(transform(B, reverse(A)))
 print(transform(A, reverse(B)))

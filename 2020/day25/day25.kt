@@ -5,7 +5,7 @@ fun main() {
     fun reverse(x: Int) = encode(7).withIndex()
         .takeWhile { (_, v) -> v.toInt() != x }.last().index + 1
 
-    val (A, B) = Pair(10705932, 12301431)
+    val (A, B) = Pair(8987316, 14681524)
     println(transform(B, reverse(A)))
     println(transform(A, reverse(B)))
 }
