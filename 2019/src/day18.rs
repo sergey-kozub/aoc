@@ -65,10 +65,10 @@ enum Cell {
 #[derive(Debug)]
 struct Maze {
     width: usize,
-    height: usize,
+    _height: usize,
     data: Vec<Cell>,
     keys: HashMap<KeyIndex, Position>,
-    doors: HashMap<KeyIndex, Position>,
+    _doors: HashMap<KeyIndex, Position>,
     start: Vec<Position>,
     paths: HashMap<(KeyIndex, KeyIndex), Vec<Path>>,
 }
@@ -77,10 +77,10 @@ impl Maze {
     fn from(text: &str) -> Maze {
         let lines: Vec<&str> = text.lines().collect();
         let width = lines[0].len();
-        let height = lines.len();
-        let mut data: Vec<Cell> = Vec::with_capacity(width * height);
+        let _height = lines.len();
+        let mut data: Vec<Cell> = Vec::with_capacity(width * _height);
         let mut keys: HashMap<KeyIndex, Position> = HashMap::new();
-        let mut doors: HashMap<KeyIndex, Position> = HashMap::new();
+        let mut _doors: HashMap<KeyIndex, Position> = HashMap::new();
         let mut start: Vec<Position> = Vec::new();
 
         for (y, line) in lines.into_iter().enumerate() {
@@ -96,7 +96,7 @@ impl Maze {
                     },
                     b'A'..=b'Z' => {
                         let n = ch - b'A';
-                        doors.insert(n, pos);
+                        _doors.insert(n, pos);
                         Cell::Door(n)
                     },
                     b'@' => {
@@ -110,7 +110,7 @@ impl Maze {
         }
 
         let paths = HashMap::new();
-        Maze { width, height, data, keys, doors, start, paths }
+        Maze { width, _height, data, keys, _doors, start, paths }
     }
 
     fn cell(&self, (x, y): Position) -> &Cell {
