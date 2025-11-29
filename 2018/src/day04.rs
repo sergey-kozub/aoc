@@ -56,7 +56,7 @@ impl LogEntry {
         GuardAction::BeginShift(x) => id = x,
         GuardAction::FallAsleep => start = minute,
         GuardAction::WakeUp => {
-          let mut e = stats.entry(id).or_insert_with(
+          let e = stats.entry(id).or_insert_with(
             || GuardStats { minutes: 0, hist: vec![0; 60] });
           e.minutes += minute - start;
           for i in start..minute { e.hist[i as usize] += 1; }
