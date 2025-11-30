@@ -31,12 +31,12 @@ impl Grid {
       let mut acc = 0_i32;
       (1..=cmp::min(n - x, n - y)).map(move |d| {
         let (px, py) = ((x + d - 1) as usize, (y + d - 1) as usize);
-        acc += self.cells[py][px] + (0..d).map(|i| {
+        acc += self.cells[py][px] + (0..d - 1).map(|i| {
           self.cells[py][(x + i) as usize] + self.cells[(y + i) as usize][px]
         }).sum::<i32>();
-        (-acc, n - d, (x, y, d))
+        (acc, (x, y, d))
       })
-    })).min().map(|t| t.2).unwrap()
+    })).max().map(|t| t.1).unwrap()
   }
 }
 
