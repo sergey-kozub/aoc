@@ -1,7 +1,7 @@
 use std::ops::Range;
 
-const X: (i32, i32) = (281, 311);
-const Y: (i32, i32) = (-74, -54);
+const X: (i32, i32) = (128, 160);
+const Y: (i32, i32) = (-142, -88);
 
 struct State {
     position: i32,

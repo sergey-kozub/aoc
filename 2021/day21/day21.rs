@@ -1,8 +1,8 @@
 use std::cmp;
 use std::collections::HashMap;
 
-const PLAYER_1: u32 = 3;
-const PLAYER_2: u32 = 5;
+const PLAYER_1: u32 = 4;
+const PLAYER_2: u32 = 10;
 
 struct Die {
     value: u32,
