@@ -52,7 +52,7 @@ impl Scanner {
     }
 
     fn get_angles(&self) -> (f64, f64) {
-        let big = 1_000;
+        let big = 100_000;
         let [l, m, r] = self.split_range([(0, big), (big, 0)]).unwrap();
         let a = self.search_range([l, m]);
         let b = self.search_range([r, m]);
@@ -60,22 +60,26 @@ impl Scanner {
     }
 
     fn search(&self, size: i32) -> i32 {
-        let (a, _) = self.get_angles();
+        let (a, b) = self.get_angles();
+        let c = (a + b) * 0.5;
         let pos = |x: f64, d: f64| ((d * x.cos()).round() as i32,
                                     (d * x.sin()).round() as i32);
-        let (mut l, mut r) = (size, 10 * size);
-        while l < r - 1 {
-            let m = (l + r) / 2;
-            let p = pos(a, m as f64 / a.sin());
+        let (l, r) = (size, 1000 * size);
+        let d = size - 1;
+        for i in l..r {
+            let p = pos(c, i as f64);
             assert!(self.get(p));
-            if self.get((p.0 + size - 1, p.1 - size + 1)) {
-                r = m;
-            } else {
-                l = m;
+            let p2 = (-10..=0).flat_map(|e| [0, 1].iter().filter_map(move |f| {
+                let p3 = (p.0 + e * f, p.1 + e * (1 - f));
+                let left = self.get((p3.0 - d, p3.1));
+                let top = self.get((p3.0, p3.1 - d));
+                if left && top {Some(p3)} else {None}
+            })).next();
+            if let Some((x, y)) = p2 {
+                return (x - d) * 10_000 + (y - d);
             }
         }
-        let res = pos(a, r as f64 / a.sin());
-        res.0 * 10_000 + res.1 - size + 1
+        0
     }
 }
 

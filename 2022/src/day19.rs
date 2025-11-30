@@ -62,7 +62,7 @@ impl Blueprint {
                 }
             };
             let x = (r.0 + p.0, r.1 + p.1, r.2 + p.2, r.3 + p.3);
-            if r.0 < ore_max {
+            if r.0 <= ore_max {
                 add_state(x, p);
             }
             if r.0 >= self.ore_cost {
