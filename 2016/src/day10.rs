@@ -129,7 +129,7 @@ value 2 goes to bot 2";
 
     #[test]
     fn small() {
-        let state = super::GameState::new(super::parse(TEST), Some((2, 5)));
+        let mut state = super::GameState::new(super::parse(TEST), Some((2, 5)));
         assert_eq!(state.run(), 2);
     }
 }
