@@ -2,6 +2,7 @@ use std::env;
 use std::fs;
 
 mod day01;
+mod day02;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -16,7 +17,7 @@ fn main() {
     let content = fs::read_to_string(filename).expect("Error reading input");
 
     let days: Vec<fn(&str)> = vec![
-        day01::run,
+        day01::run, day02::run,
     ];
     days[number - 1](&content)
 }
