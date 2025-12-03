@@ -42,6 +42,6 @@ pub fn run(content: &str) {
 mod tests {
     #[test]
     fn small() {
-        assert_eq!(super::Maze { design: 10 }.move_to((7, 4)), 11);
+        assert_eq!(super::Maze { design: 10 }.move_to((7, 4), usize::MAX), 11);
     }
 }
