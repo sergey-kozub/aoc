@@ -4,3 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+good_lp = { version = "1.14", features = ["microlp"], default-features = false }
