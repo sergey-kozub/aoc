@@ -45,11 +45,12 @@ class Circle:
             node.next = res[-1]
             node = node.next
 
+start = int(input_[0])
 small = Circle(input_, 9)
-small.move(1, 100)
+small.move(start, 100)
 print(''.join(map(str, small.get(1, 8))))
 
 big = Circle(input_, 1000000)
-big.move(1, 10000000)
+big.move(start, 10000000)
 a, b = big.get(1, 2)
 print(a * b)

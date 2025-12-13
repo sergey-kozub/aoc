@@ -131,7 +131,15 @@ impl Game {
   }
 }
 
-fn find_boost(game: &Game, limit: u32) -> (u32, u32) {
+fn find_boost(game: &Game, limit: u32, binary: bool) -> (u32, u32) {
+  if !binary {
+    for i in 1..=limit {
+      let (wins, result) = game.boost(i).play();
+      if let Some(Team::ImmuneSystem) = wins {
+        return (i, result);
+      }
+    }
+  }
   let (mut l, mut r) = (0, limit);
   let mut score = 0;
   while l + 1 < r {
@@ -146,7 +154,7 @@ fn find_boost(game: &Game, limit: u32) -> (u32, u32) {
 pub fn run(content: &str) {
   let game = Game::parse(content);
   let res1 = game.clone().play().1;
-  let res2 = find_boost(&game, 1_000_000).1;
+  let res2 = find_boost(&game, 1_000_000, false).1;
   println!("{} {}", res1, res2);
 }
 
@@ -176,6 +184,6 @@ Infection:
   fn large() {
     let clean = String::from(TEST).replace("\n ", "");
     let test = super::Game::parse(&clean);
-    assert_eq!(super::find_boost(&test, 10_000), (1570, 51));
+    assert_eq!(super::find_boost(&test, 10_000, true), (1570, 51));
   }
 }
