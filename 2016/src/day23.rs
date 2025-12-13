@@ -1,24 +1,25 @@
 
 #[derive(Clone, Copy, Debug)]
-enum Value {
+pub enum Value {
     Imm(i64),
     Reg(u8),
 }
 
 #[derive(Clone, Copy, Debug)]
-enum Instruction {
+pub enum Instruction {
     Cpy(Value, Value),
     Inc(Value),
     Dec(Value),
     Jnz(Value, Value),
     Tgl(Value),
+    Out(Value),
 }
 
 #[derive(Clone, Debug)]
-struct Program {
-    code: Vec<Instruction>,
-    regs: Vec<i64>,
-    ip: i64,
+pub struct Program {
+    pub code: Vec<Instruction>,
+    pub regs: Vec<i64>,
+    pub ip: i64,
 }
 
 impl Instruction {
@@ -39,13 +40,14 @@ impl Instruction {
             "dec" => Self::Dec(as_value(a[1])),
             "jnz" => Self::Jnz(as_value(a[1]), as_value(a[2])),
             "tgl" => Self::Tgl(as_value(a[1])),
+            "out" => Self::Out(as_value(a[1])),
             _ => panic!(),
         }
     }
 }
 
 impl Program {
-    fn new(text: &str) -> Self {
+    pub fn new(text: &str) -> Self {
         Self {
             code: text.lines().map(Instruction::parse).collect(),
             regs: vec![0; 4],
@@ -53,14 +55,14 @@ impl Program {
         }
     }
 
-    fn get(&self, value: &Value) -> i64 {
+    pub fn get(&self, value: &Value) -> i64 {
         match value {
             Value::Imm(v) => *v,
             Value::Reg(i) => self.regs[*i as usize],
         }
     }
 
-    fn step(&mut self) -> bool {
+    pub fn step(&mut self) -> bool {
         let limit = self.code.len() as i64;
         let valid = |ip| ip >= 0 && ip < limit;
         match self.code[self.ip as usize] {
@@ -94,9 +96,11 @@ impl Program {
                         Instruction::Dec(x) => Instruction::Inc(x),
                         Instruction::Jnz(x, y) => Instruction::Cpy(x, y),
                         Instruction::Tgl(x) => Instruction::Inc(x),
+                        Instruction::Out(x) => Instruction::Out(x),
                     };
                 }
             },
+            Instruction::Out(_) => {},
         }
         self.ip += 1;
         valid(self.ip)
